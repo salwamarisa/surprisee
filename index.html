@@ -1,131 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
+
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For You 🤍</title>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Happy Birthday 🤍</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&display=swap"
+rel="stylesheet">
 
 <style>
-body {
-  margin: 0;
-  background: #0b0b0b;
-  font-family: 'Georgia', serif;
-  color: white;
-  overflow:hidden;
-}
 
-/* INTRO */
-#intro {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5rem;
-  z-index: 10;
-  
-}
+/* ===========================
+   RESET
+=========================== */
 
-@keyframes fadeOut {
-  to { opacity: 0; visibility: hidden; }
-}
-
-/* FRAME */
-.frame{
-    width:85vw;
-    max-width:340px;
-    aspect-ratio:3/4;
-
-    background:#111;
-    border:10px solid #444;
-    overflow:hidden;
-
-    box-shadow:0 15px 40px rgba(0,0,0,.6);
-
-    transition:.5s;
-}
-
-.frame img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.frame:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 80px rgba(255,255,255,0.4);
-}
-
-/* SPOTLIGHT */
-.art::before {
-  content: "";
-  position: absolute;
-  top: -120px;
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, rgba(255,255,255,0.25), transparent);
-}
-
-/* CAPTION */
-.caption{
-    width:85vw;
-    max-width:340px;
-
-    margin-top:25px;
-
-    text-align:center;
-    font-size:16px;
-    line-height:1.7;
-
-    color:#f5f5f5;
-}
-
-/* NAME */
-#nameTag {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  opacity: 0.5;
-  font-size: 0.9rem;
-}
-#intro {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  z-index: 10;
-}
-
-#introText {
-  font-size: 1.5rem;
-  opacity: 0;
-  transition: 1s;
-}
-#finalMessage {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: black;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  transition: 1s;
-  text-align: center;
-  padding: 20px;
-}
-
-#finalMessage.show {
-  opacity: 1;*{
+*{
 margin:0;
 padding:0;
 box-sizing:border-box;
@@ -135,22 +35,133 @@ html,body{
 
 width:100%;
 height:100%;
+
 overflow:hidden;
 
-background:black;
-font-family:Georgia;
+font-family:'Cormorant Garamond',serif;
+
+background:#050505;
+
 color:white;
 
 }
+
+/* ===========================
+   INTRO
+=========================== */
+
+#intro{
+
+position:fixed;
+
+inset:0;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+background:black;
+
+z-index:999;
+
+transition:1s;
+
+}
+
+#intro.hide{
+
+opacity:0;
+
+visibility:hidden;
+
+}
+
+.intro-box{
+
+text-align:center;
+
+padding:30px;
+
+max-width:500px;
+
+}
+
+#introTitle{
+
+font-size:42px;
+
+font-weight:600;
+
+margin-bottom:20px;
+
+opacity:0;
+
+transition:1s;
+
+}
+
+#introDesc{
+
+font-size:22px;
+
+line-height:1.8;
+
+opacity:0;
+
+margin-bottom:40px;
+
+transition:1s;
+
+color:#d8d8d8;
+
+}
+
+#startBtn{
+
+padding:16px 45px;
+
+font-size:18px;
+
+border:none;
+
+border-radius:50px;
+
+cursor:pointer;
+
+background:white;
+
+color:black;
+
+font-family:inherit;
+
+transition:.3s;
+
+}
+
+#startBtn:hover{
+
+transform:scale(1.08);
+
+}
+
+/* ===========================
+   GALLERY
+=========================== */
 
 .gallery{
 
 display:flex;
 
 width:100vw;
+
 height:100vh;
 
 overflow-x:auto;
+
+overflow-y:hidden;
+
 scroll-snap-type:x mandatory;
 
 scroll-behavior:smooth;
@@ -163,9 +174,14 @@ display:none;
 
 }
 
+/* ===========================
+   SLIDE
+=========================== */
+
 .slide{
 
 min-width:100vw;
+
 height:100vh;
 
 display:flex;
@@ -176,64 +192,117 @@ justify-content:center;
 
 align-items:center;
 
+padding:30px;
+
 scroll-snap-align:start;
 
-padding:25px;
+position:relative;
 
 }
 
-.slide img{
+/* Spotlight */
 
-width:90vw;
+.slide::before{
+
+content:"";
+
+position:absolute;
+
+top:40px;
+
+width:250px;
+
+height:250px;
+
+background:radial-gradient(circle,
+rgba(255,255,255,.18),
+transparent);
+
+filter:blur(8px);
+
+}
+
+/* ===========================
+   FRAME
+=========================== */
+
+.frame{
+
+width:85vw;
+
 max-width:360px;
 
 aspect-ratio:3/4;
 
-object-fit:cover;
+border:12px solid #444;
 
-border:10px solid #444;
+overflow:hidden;
 
-box-shadow:0 0 40px rgba(255,255,255,.15);
+background:#111;
 
-border-radius:8px;
+box-shadow:
+
+0 0 30px rgba(255,255,255,.05),
+
+0 20px 60px rgba(0,0,0,.7);
+
+transition:.5s;
 
 }
+
+.frame:hover{
+
+transform:scale(1.03);
+
+}
+
+.frame img{
+
+width:100%;
+
+height:100%;
+
+object-fit:cover;
+
+display:block;
+
+}
+
+/* ===========================
+   CAPTION
+=========================== */
 
 .slide p{
 
 margin-top:25px;
 
-font-size:17px;
-
-line-height:1.8;
+font-size:20px;
 
 text-align:center;
 
-max-width:350px;
+line-height:1.8;
 
-opacity:.85;
-
-animation:fade 2s;
-
-}
-
-@keyframes fade{
-
-from{
+max-width:360px;
 
 opacity:0;
-transform:translateY(20px);
+
+transform:translateY(30px);
+
+transition:1s;
 
 }
 
-to{
+.slide.active p{
 
 opacity:1;
+
 transform:translateY(0);
 
 }
 
-}
+/* ===========================
+   LETTER
+=========================== */
 
 #letter{
 
@@ -241,25 +310,21 @@ position:fixed;
 
 inset:0;
 
-background:black;
-
 display:flex;
-
-flex-direction:column;
 
 justify-content:center;
 
 align-items:center;
 
-padding:35px;
+background:black;
+
+padding:30px;
 
 opacity:0;
 
 pointer-events:none;
 
 transition:1s;
-
-text-align:center;
 
 }
 
@@ -271,24 +336,135 @@ pointer-events:auto;
 
 }
 
-#letter h1{
+.letter-box{
+
+max-width:650px;
+
+text-align:center;
+
+animation:fade 1.5s;
+
+}
+
+.letter-box h1{
+
+font-size:45px;
 
 margin-bottom:25px;
 
 }
 
-#letter p{
+.letter-box p{
 
-max-width:420px;
+font-size:22px;
+
+line-height:2;
+
+color:#f0f0f0;
+
+white-space:pre-line;
+
+}
+
+/* ===========================
+   NAME
+=========================== */
+
+#nameTag{
+
+position:fixed;
+
+right:20px;
+
+bottom:20px;
+
+opacity:.5;
+
+font-size:14px;
+
+z-index:20;
+
+}
+
+/* ===========================
+   ANIMATION
+=========================== */
+
+@keyframes fade{
+
+from{
+
+opacity:0;
+
+transform:translateY(20px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media(max-width:768px){
+
+#introTitle{
+
+font-size:34px;
+
+}
+
+#introDesc{
+
+font-size:18px;
+
+}
+
+.frame{
+
+width:88vw;
+
+}
+
+.slide p{
+
+font-size:17px;
+
+max-width:320px;
+
+}
+
+.letter-box h1{
+
+font-size:34px;
+
+}
+
+.letter-box p{
+
+font-size:18px;
 
 line-height:1.8;
 
 }
+
+}
+
 </style>
+
 </head>
 
 <body>
 
+<!-- INTRO -->
 <div id="intro">
   <div id="introText"></div>
 </div>
@@ -302,7 +478,7 @@ line-height:1.8;
 
   <div class="art">
     <div class="frame"><img src="img1.jpg"></div>
-    <div class="caption">Bersamamu, aku belajar bahwa rasa nyaman ternyata bisa sesederhana saling menggenggam dan saling menemani.</div>
+    <div class="caption">I hope loving me isn't the hardest thing you'll ever have to do.</div>
   </div>
 
   <div class="art">
@@ -342,65 +518,150 @@ line-height:1.8;
 <div id="nameTag"></div>
 
 <script>
-/* NAME */
-let name = prompt("Who is this masterpiece? 🤍") || "You";
-document.getElementById("nameTag").innerText = name;
 
-/* MUSIC AUTOPLAY FIX */
+// ===============================
+// ELEMENT
+// ===============================
+
+const intro = document.getElementById("intro");
+const introTitle = document.getElementById("introTitle");
+const introDesc = document.getElementById("introDesc");
+const startBtn = document.getElementById("startBtn");
+
+const gallery = document.querySelector(".gallery");
+const slides = document.querySelectorAll(".slide");
+
 const music = document.getElementById("bgm");
-document.body.addEventListener("click", () => {
-  music.play();
-}, { once: true });
 
-const music=document.getElementById("bgm");
+const letter = document.getElementById("letter");
 
-document.body.addEventListener("click",()=>{
+// ===============================
+// INTRO TEXT
+// ===============================
 
-music.play();
+const title = "Hi, Sayang 🤍";
 
-},{once:true});
+const desc =
+"Selamat datang di museum kecil yang kubuat khusus untukmu.";
 
-const gallery=document.querySelector(".gallery");
+// tampilkan tulisan perlahan
+setTimeout(() => {
 
-const slides=document.querySelectorAll(".slide");
+    introTitle.textContent = title;
+    introTitle.style.opacity = 1;
 
-let current=0;
+},500);
 
-function autoSlide(){
+setTimeout(() => {
 
-if(current<slides.length-1){
+    introDesc.textContent = desc;
+    introDesc.style.opacity = 1;
 
-current++;
+},1800);
 
-gallery.scrollTo({
+// ===============================
+// START
+// ===============================
 
-left:current*window.innerWidth,
+let current = 0;
+let timer;
 
-behavior:"smooth"
+startBtn.addEventListener("click", async ()=>{
+
+    try{
+        await music.play();
+    }catch(e){}
+
+    intro.classList.add("hide");
+
+    slides[0].classList.add("active");
+
+    timer = setInterval(nextSlide,5000);
 
 });
 
-setTimeout(autoSlide,5000);
+// ===============================
+// NEXT SLIDE
+// ===============================
 
-}else{
+function nextSlide(){
 
-setTimeout(()=>{
+    if(current < slides.length-1){
 
-document.getElementById("letter").classList.add("show");
+        slides[current].classList.remove("active");
 
-},5000);
+        current++;
+
+        gallery.scrollTo({
+
+            left: current * window.innerWidth,
+
+            behavior:"smooth"
+
+        });
+
+        slides[current].classList.add("active");
+
+    }
+
+    else{
+
+        clearInterval(timer);
+
+        setTimeout(()=>{
+
+            letter.classList.add("show");
+
+        },2500);
+
+    }
 
 }
 
-}
+// ===============================
+// SWIPE MANUAL
+// ===============================
 
-setTimeout(autoSlide,4000);
-showIntro();
-setTimeout(() => {
-  document.getElementById("finalMessage").classList.add("show");
-}, 25000);
+gallery.addEventListener("scroll",()=>{
+
+    let index = Math.round(
+        gallery.scrollLeft / window.innerWidth
+    );
+
+    slides.forEach(slide=>{
+
+        slide.classList.remove("active");
+
+    });
+
+    slides[index].classList.add("active");
+
+    current = index;
+
+});
+
+// ===============================
+// MUSIC VOLUME
+// ===============================
+
+music.volume = 0.4;
+
+// ===============================
+// OPTIONAL
+// ===============================
+
+window.addEventListener("resize",()=>{
+
+    gallery.scrollTo({
+
+        left:current*window.innerWidth
+
+    });
+
+});
 
 </script>
 
 </body>
+
 </html>
