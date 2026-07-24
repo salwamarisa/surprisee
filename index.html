@@ -10,7 +10,7 @@ body {
   background: #0b0b0b;
   font-family: 'Georgia', serif;
   color: white;
-  overflow-x: scroll;
+  overflow:hidden;
 }
 
 /* INTRO */
@@ -267,18 +267,16 @@ document.body.addEventListener("click", () => {
 }, { once: true });
 
 /* AUTO SCROLL */
-let scrollPos = 0;
-function autoScroll(){
-  scrollPos += 0.3;
-  const gallery = document.getElementById("gallery");
+/* AUTO SLIDE */
+
+const gallery = document.getElementById("gallery");
+const cards = document.querySelectorAll(".art");
 
 let current = 0;
 
 function nextSlide(){
 
-    const cards = document.querySelectorAll(".art");
-
-    if(current < cards.length-1){
+    if(current < cards.length - 1){
 
         current++;
 
@@ -287,16 +285,13 @@ function nextSlide(){
             behavior:"smooth"
         });
 
-        setTimeout(nextSlide,5000);
+        setTimeout(nextSlide, 5000);
 
     }
 
 }
 
-setTimeout(nextSlide,5000);
-  requestAnimationFrame(autoScroll);
-}
-setTimeout(autoScroll, 4000);
+setTimeout(nextSlide, 4000);
 const introText = document.getElementById("introText");
 
 const introLines = [
