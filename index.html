@@ -151,51 +151,163 @@ body {
 }
 
 #finalMessage.show {
-  opacity: 1;
-}
-.gallery {
-  scroll-snap-type: x mandatory;
+  opacity: 1;*{
+margin:0;
+padding:0;
+box-sizing:border-box;
 }
 
-.art {
-  scroll-snap-align: center;
+html,body{
+
+width:100%;
+height:100%;
+overflow:hidden;
+
+background:black;
+font-family:Georgia;
+color:white;
+
 }
-@media (max-width:768px){
 
 .gallery{
-    gap:40px;
-    padding:40px 20px;
+
+display:flex;
+
+width:100vw;
+height:100vh;
+
+overflow-x:auto;
+scroll-snap-type:x mandatory;
+
+scroll-behavior:smooth;
+
 }
 
-.frame{
-    width:85vw;
-    max-width:320px;
+.gallery::-webkit-scrollbar{
+
+display:none;
+
 }
 
-.caption{
-    width:85vw;
-    font-size:14px;
+.slide{
+
+min-width:100vw;
+height:100vh;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+scroll-snap-align:start;
+
+padding:25px;
+
 }
 
-#introText{
-    font-size:1.2rem;
-    padding:20px;
+.slide img{
+
+width:90vw;
+max-width:360px;
+
+aspect-ratio:3/4;
+
+object-fit:cover;
+
+border:10px solid #444;
+
+box-shadow:0 0 40px rgba(255,255,255,.15);
+
+border-radius:8px;
+
 }
 
-#finalMessage h1{
-    font-size:2rem;
+.slide p{
+
+margin-top:25px;
+
+font-size:17px;
+
+line-height:1.8;
+
+text-align:center;
+
+max-width:350px;
+
+opacity:.85;
+
+animation:fade 2s;
+
 }
 
-#finalMessage p{
-    font-size:15px;
-    line-height:1.7;
+@keyframes fade{
+
+from{
+
+opacity:0;
+transform:translateY(20px);
+
 }
 
-#nameTag{
-    font-size:13px;
-    right:15px;
-    bottom:15px;
+to{
+
+opacity:1;
+transform:translateY(0);
+
 }
+
+}
+
+#letter{
+
+position:fixed;
+
+inset:0;
+
+background:black;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+padding:35px;
+
+opacity:0;
+
+pointer-events:none;
+
+transition:1s;
+
+text-align:center;
+
+}
+
+#letter.show{
+
+opacity:1;
+
+pointer-events:auto;
+
+}
+
+#letter h1{
+
+margin-bottom:25px;
+
+}
+
+#letter p{
+
+max-width:420px;
+
+line-height:1.8;
 
 }
 </style>
@@ -266,61 +378,49 @@ document.body.addEventListener("click", () => {
   music.play();
 }, { once: true });
 
-/* AUTO SCROLL */
-/* AUTO SLIDE */
+const music=document.getElementById("bgm");
 
-const gallery = document.getElementById("gallery");
-const cards = document.querySelectorAll(".art");
+document.body.addEventListener("click",()=>{
 
-let current = 0;
+music.play();
 
-function nextSlide(){
+},{once:true});
 
-    if(current < cards.length - 1){
+const gallery=document.querySelector(".gallery");
 
-        current++;
+const slides=document.querySelectorAll(".slide");
 
-        gallery.scrollTo({
-            left: current * window.innerWidth,
-            behavior:"smooth"
-        });
+let current=0;
 
-        setTimeout(nextSlide, 5000);
+function autoSlide(){
 
-    }
+if(current<slides.length-1){
+
+current++;
+
+gallery.scrollTo({
+
+left:current*window.innerWidth,
+
+behavior:"smooth"
+
+});
+
+setTimeout(autoSlide,5000);
+
+}else{
+
+setTimeout(()=>{
+
+document.getElementById("letter").classList.add("show");
+
+},5000);
 
 }
 
-setTimeout(nextSlide, 4000);
-const introText = document.getElementById("introText");
-
-const introLines = [
-  "Hi...",
-  "Welcome to our mini art gallery.",
-  "There’s something I want to show you."
-];
-
-let i = 0;
-
-function showIntro() {
-  if (i < introLines.length) {
-    introText.style.opacity = 0;
-
-    setTimeout(() => {
-      introText.innerText = introLines[i];
-      introText.style.opacity = 1;
-      i++;
-      setTimeout(showIntro, 2000);
-    }, 500);
-  } else {
-    // hilangkan intro
-    document.getElementById("intro").style.opacity = 0;
-    setTimeout(() => {
-      document.getElementById("intro").style.display = "none";
-    }, 1000);
-  }
 }
 
+setTimeout(autoSlide,4000);
 showIntro();
 setTimeout(() => {
   document.getElementById("finalMessage").classList.add("show");
