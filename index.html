@@ -33,16 +33,16 @@ body {
 
 .gallery{
     display:flex;
-    overflow-x:auto;
-    overflow-y:hidden;
-
     width:100vw;
     height:100vh;
 
-    gap:0;
-    padding:0;
+    overflow-x:auto;
+    overflow-y:hidden;
 
     scroll-snap-type:x mandatory;
+
+    gap:0;
+    padding:0;
 }
 /* ART BLOCK */
 .art{
@@ -271,6 +271,8 @@ document.body.addEventListener("click", () => {
 const gallery = document.getElementById("gallery");
 const cards = document.querySelectorAll(".art");
 
+const cards = document.querySelectorAll(".art");
+
 let current = 0;
 
 function nextSlide(){
@@ -279,18 +281,24 @@ function nextSlide(){
 
         current++;
 
-        gallery.scrollTo({
-            left: current * window.innerWidth,
-            behavior:"smooth"
+        cards[current].scrollIntoView({
+            behavior: "smooth",
+            inline: "center"
         });
 
-        setTimeout(nextSlide, 5000);
+        setTimeout(nextSlide,5000);
+
+    }else{
+
+        setTimeout(()=>{
+            document.getElementById("finalMessage").classList.add("show");
+        },3000);
 
     }
 
 }
 
-setTimeout(nextSlide, 4000);
+setTimeout(nextSlide,5000);
 const introText = document.getElementById("introText");
 
 const introLines = [
